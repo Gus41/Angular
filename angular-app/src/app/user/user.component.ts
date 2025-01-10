@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { DUMMY_USERS } from './dummy-users';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -8,5 +7,17 @@ import { DUMMY_USERS } from './dummy-users';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  selectedUser = DUMMY_USERS[1]
+
+
+  //@Input({required: true}) avatar!: string;
+  //@Input({required: true}) name!: string;
+
+  //input function returns a readOnly InputSignal
+  avatar = input.required<string>()
+  name = input.required<string>()
+
+  onSelectUser() {
+
+  }
+
 }
