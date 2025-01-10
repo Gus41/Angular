@@ -1,23 +1,20 @@
-import { Component, input } from '@angular/core';
-
+import { Component, EventEmitter, input, Input, Output, output } from '@angular/core';
+import { User } from './user.model';
+import { CardComponent } from "../sharedc/card/card.component";
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
 
-
-  //@Input({required: true}) avatar!: string;
-  //@Input({required: true}) name!: string;
-
-  //input function returns a readOnly InputSignal
-  avatar = input.required<string>()
-  name = input.required<string>()
+  @Input({ required: true }) user!: User
+  @Input({required:true}) active!: boolean
+  @Output() select = new EventEmitter<string>();
 
   onSelectUser() {
-
+    this.select.emit(this.user.id);
   }
 
 }
