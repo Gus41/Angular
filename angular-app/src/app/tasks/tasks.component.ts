@@ -11,10 +11,15 @@ import { TasksService } from './tasks.service';
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
+  constructor(taskService: TasksService){
+    this.tasksService = taskService;
+  }
+  private tasksService: TasksService;
 
   @Input() name? : string;
   @Input({required:true}) userId! : string;
   tasks = DUMMY_TASKS;
+
 
 
   appendTask(taskData:{title:string, summary: string, dueDate:string}){
@@ -29,11 +34,11 @@ export class TasksComponent {
   }
 
   get userTasks(){
-    return this.tasks.filter((task)=>task.userId == this.userId);
+    return this.tasksService.getUserTasks(this.userId)
   }
 
   onCompleteTask(taskId: string){
-    this.tasks = this.tasks.filter((task)=> task.id != taskId )
+    this.tasksService.deleteTask(taskId)
   }
   showModal = false
   toggleModal(){

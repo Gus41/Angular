@@ -9,7 +9,7 @@
     </header>
     <ul>
         @if (showModal) {
-            <app-new-task (cancel)="toggleModal()" (add)="appendTask($event)" />
+            <app-new-task (cancel)="toggleModal()" (add)="appendTask($event)" userId="{{userId}}" />
         }
         @if (userTasks.length>0) {
             @for (task of userTasks; track task.id) {

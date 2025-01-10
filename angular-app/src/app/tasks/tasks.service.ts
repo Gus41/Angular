@@ -1,6 +1,19 @@
+import { Injectable } from "@angular/core";
 import { DUMMY_TASKS } from "../task/dummy-tasks";
+import { take } from "rxjs";
 
+@Injectable({providedIn: 'root'})
 export class TasksService {
+
+
+
+    constructor(){
+        const tasks = localStorage.getItem("tasks")
+
+        if(tasks){
+            this.tasks = JSON.parse(tasks)
+        }
+    }
     private tasks = DUMMY_TASKS;
 
 
@@ -16,11 +29,17 @@ export class TasksService {
             dueDate: taskData.dueDate,
             userId: userId
         })
+        this.saveTasks()
        
     }
 
     deleteTask(taskId: string){
         this.tasks = this.tasks.filter((task)=> task.id != taskId )
+        this.saveTasks()
       }
 
+
+    private saveTasks(){
+        localStorage.setItem("tasks",JSON.stringify(this.tasks))
+    }
 }
