@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms'
+import InvestimentService from '../investiment.service';
 
 @Component({
   selector: 'app-user-input',
@@ -9,29 +10,25 @@ import { FormsModule } from '@angular/forms'
 })
 export class UserInputComponent {
 
-  @Output()
-  calculate = new EventEmitter<{
-    initialInvestment: number, 
-    duration: number, 
-    expectedReturn: number, 
-    annualInvestment: number
-  }>();
+  constructor(private investimentService: InvestimentService){
+    
+  }
 
   //form data
-  initialInvestiment = '0';
-  annualInvestiment = '0';
-  expectedReturn = '5';
-  duration = '10'
+  initialInvestiment = signal('0');
+  annualInvestiment = signal('0');
+  expectedReturn = signal('5');
+  duration = signal('5')
 
   handleSubmit() {
     console.log("Form submited")
     
     //the plush convert the string to a number
-    this.calculate.emit({
-      initialInvestment: +this.initialInvestiment,
-      annualInvestment: +this.annualInvestiment,
-      expectedReturn: +this.expectedReturn,
-      duration: +this.duration
+    this.investimentService.calculateInvestmentResults({
+      initialInvestment: +this.initialInvestiment(),
+      annualInvestment: +this.annualInvestiment(),
+      expectedReturn: +this.expectedReturn(),
+      duration: +this.duration()
     });
   }
 
