@@ -1,14 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
-import { UserInputComponent } from './user-input/user-input.component';
-import InvestimentInput from './investiment-input.model';
-import { InvestimentResultsComponent } from './investiment-results/investiment-results.component';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, UserInputComponent, InvestimentResultsComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  standalone:false
 })
 export class AppComponent {
   title = 'investiment-calculator';

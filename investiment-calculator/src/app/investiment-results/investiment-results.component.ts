@@ -1,13 +1,13 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 import InvestimentService from '../investiment.service';
 
 
 @Component({
   selector: 'app-investiment-results',
-  imports: [CurrencyPipe],
   templateUrl: './investiment-results.component.html',
-  styleUrl: './investiment-results.component.css'
+  styleUrl: './investiment-results.component.css',
+  standalone:false
 })
 export class InvestimentResultsComponent {
 
