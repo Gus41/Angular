@@ -1,18 +1,31 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, viewChild } from '@angular/core';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { ControllComponent } from '../../../components/controll/controll.component';
-import {FormsModule} from '@angular/forms'
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-new-ticket',
   templateUrl: './new-ticket.component.html',
   styleUrl: './new-ticket.component.css',
-  imports: [ButtonComponent,ControllComponent, FormsModule],
+  imports: [ButtonComponent, ControllComponent, FormsModule],
 })
-export class NewTicketComponent {
+export class NewTicketComponent implements AfterViewInit, OnInit {
 
-  onSubmit(title: string, content: string){
-    if(title.trim() == '' || content.trim() == ''){
+  //@ViewChild('form') form? : ElementRef<HTMLFormElement>;
+  private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+
+
+  ngAfterViewInit(): void {
+    console.log(this.form()?.nativeElement)
+  }
+  ngOnInit(): void {
+    console.log(this.form()?.nativeElement)
+  }
+
+  onSubmit(title: string, content: string) {
+    this.form()?.nativeElement.reset()
+
+    if (title.trim() == '' || content.trim() == '') {
       return
     }
 
