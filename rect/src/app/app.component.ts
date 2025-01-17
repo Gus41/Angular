@@ -14,7 +14,4 @@ export class AppComponent {
     height: '100',
   };
 
-  onReset(){
-    
-  }
 }
