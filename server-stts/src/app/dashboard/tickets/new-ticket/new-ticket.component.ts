@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, output, Output, viewChild } from '@angular/core';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { ControllComponent } from '../../../components/controll/controll.component';
 import { FormsModule } from '@angular/forms'
@@ -13,6 +13,10 @@ export class NewTicketComponent implements AfterViewInit, OnInit {
 
   //@ViewChild('form') form? : ElementRef<HTMLFormElement>;
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+  add = output<{title:string,text:string}>()
+
+  enteredTitlte = '';
+  enteredText = ''
 
 
   ngAfterViewInit(): void {
@@ -22,12 +26,14 @@ export class NewTicketComponent implements AfterViewInit, OnInit {
     console.log(this.form()?.nativeElement)
   }
 
-  onSubmit(title: string, content: string) {
-    this.form()?.nativeElement.reset()
+  onSubmit() {
 
-    if (title.trim() == '' || content.trim() == '') {
+    if (this.enteredTitlte.trim() == '' || this.enteredText.trim() == '') {
       return
     }
+    this.add.emit({title: this.enteredTitlte, text: this.enteredTitlte});
 
+    this.enteredText = ''
+    this.enteredTitlte = ''
   }
 }
