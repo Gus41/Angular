@@ -7,7 +7,7 @@ import { AfterViewInit, Component, DestroyRef, effect, inject, OnDestroy, OnInit
 })
 export class ServerStatusComponent implements OnInit {
 
-  private interval?: ReturnType<typeof setInterval>
+  //private interval?: ReturnType<typeof setInterval>
   private destroyRef = inject(DestroyRef);
 
   constructor(){
